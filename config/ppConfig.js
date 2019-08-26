@@ -10,14 +10,11 @@ passport.use(new GitHubStrategy({
 },
 function(accessToken, refreshToken, profile, cb) {
   db.user.findOrCreate({
-    where: { githubId: profile.id},
-    defaults: {
-      token: accessToken
-    }
+    where: { githubId: profile.id}
   })
   .spread((user, created) => {
-    console.log("Token: " + accessToken)
-    return cb(null, user)
+    let hasDeets = {...user.dataValues, accessToken}
+    return cb(null, hasDeets)
   })
   .catch(err => {
     return cb(err, null)

@@ -7,7 +7,7 @@ router.get('/repos', (req, res) => {
   console.log(req.user)
   let config = {
     headers: {
-      'Authorization': `Bearer ${req.user.token}`,
+      'Authorization': `Bearer ${req.user.accessToken}`,
       'User-Agent': 'KingKong-Boilerplate',
     }
   }
