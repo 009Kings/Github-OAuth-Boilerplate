@@ -25,12 +25,20 @@ app.use(passport.session());
 
 // ROUTES
 app.get('/', (req, res) => {
-  res.render('index')
+  console.log(req.user || "🍑")
+  res.render('index', { user: req.user || null })
 })
+
+function fuckOff(req, res, next) {
+  console.log("eat my shorts")
+  if(req.isAuthenticated()) { return next(); }
+  res.redirect('/auth/github')
+}
 
 // Controllers
 app.use('/auth', require('./controllers/auth'));
-app.use('/api', require('./controllers/api'));
+app.use('/api', fuckOff, require('./controllers/api'));
+app.use('/', fuckOff, require('./controllers/protected'))
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`🎧You're listening to the smooth sounds of port ${process.env.PORT || 3000}🎧`)

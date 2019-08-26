@@ -14,7 +14,7 @@ router.get('/repos', (req, res) => {
   axios.get('https://api.github.com/user/repos', config)
     .then((response) => {
       console.log(response.data)
-      res.render('repos', { repos: response.data })
+      res.render('repos', { repos: response.data, user: req.user })
     })
     .catch(err => {
       console.log('fuckin yikes bud')
