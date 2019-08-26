@@ -11,9 +11,6 @@ module.exports = {
       githubId: {
         type: Sequelize.INTEGER
       },
-      token: {
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
