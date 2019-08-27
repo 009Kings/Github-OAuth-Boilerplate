@@ -5,12 +5,14 @@ const axios = require('axios');
 
 router.get('/repos', (req, res) => {
   console.log(req.user)
+
   let config = {
     headers: {
       'Authorization': `Bearer ${req.user.accessToken}`,
       'User-Agent': 'KingKong-Boilerplate',
     }
   }
+  
   axios.get('https://api.github.com/user/repos', config)
     .then((response) => {
       console.log(response.data)
